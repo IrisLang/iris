@@ -1,0 +1,25 @@
+on:
+  push:
+    tags:
+      - "**"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+      - name: Setup Java 17 ☕
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: sbt
+      - name: Assemble .jar 👷
+        run: sbt assembly
+      - name: Prepare release 📦
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Iris ${{ github.ref_name }}
+          files: build/*.jar
+          generate_release_notes: true
