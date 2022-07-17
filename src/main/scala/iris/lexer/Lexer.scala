@@ -27,8 +27,7 @@ class Lexer(reader: Reader):
 		val str = StringBuilder()
 
 		while reader.peek.isDefined && isValidWordChar(reader.peek.get) do
-			val char = reader.peek.get
-			str.append(char)
+			str.append(reader.peek.get)
 			reader.next()
 
 		val lexeme = str.toString
