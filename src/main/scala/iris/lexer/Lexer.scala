@@ -31,10 +31,8 @@ class Lexer(reader: Reader):
 			reader.next()
 
 		val lexeme = str.toString
-		if lexeme.toIntOption.isDefined then
-			token = Token(TokenKind.Integer, lexeme, pos)
-		else
-			token = Token(TokenKind.Identifier, lexeme, pos)
+		val kind = if lexeme.toIntOption.isDefined then TokenKind.Integer else TokenKind.Identifier
+		token = Token(kind, lexeme, pos)
 
 	private def skipWhitespace(): Unit =
 		while reader.peek.isDefined && reader.peek.get.isWhitespace do
