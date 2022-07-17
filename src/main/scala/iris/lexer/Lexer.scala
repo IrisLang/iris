@@ -31,7 +31,14 @@ class Lexer(reader: Reader):
 			reader.next()
 
 		val lexeme = str.toString
-		val kind = if lexeme.toIntOption.isDefined then TokenKind.Integer else TokenKind.Identifier
+		val kind =
+			if lexeme.toIntOption.isDefined then
+				TokenKind.Integer
+			else if ReservedKeywords.contains(lexeme) then
+				TokenKind.Keyword
+			else
+				TokenKind.Identifier
+
 		token = Token(kind, lexeme, pos)
 
 	private def skipWhitespace(): Unit =

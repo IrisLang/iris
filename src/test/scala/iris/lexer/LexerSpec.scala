@@ -44,6 +44,13 @@ class LexerSpec extends AnyFlatSpec {
 		))
 	}
 
+	"Lexer" should "correctly lex reserved keywords" in {
+		val lexer = makeLexer("let")
+		assertLexerOutput(lexer, List(
+			Token(TokenKind.Keyword, "let", (1, 0))
+		))
+	}
+
 	"Lexer" should "correctly lex integers" in {
 		val lexer = makeLexer("30 -999 0")
 		assertLexerOutput(lexer, List(
@@ -66,7 +73,7 @@ class LexerSpec extends AnyFlatSpec {
 
 		assertLexerOutput(lexer, List(
 			Token(TokenKind.LParen, "(", (1, 0)),
-			Token(TokenKind.Identifier, "let", (1, 1)),
+			Token(TokenKind.Keyword, "let", (1, 1)),
 			Token(TokenKind.LParen, "(", (1, 5)),
 			Token(TokenKind.Identifier, "average", (1, 6)),
 			Token(TokenKind.Identifier, "a", (1, 14)),
