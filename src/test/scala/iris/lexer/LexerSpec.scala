@@ -13,9 +13,11 @@ def assertLexerOutput(lexer: Lexer, output: List[Token]): Unit =
 		lexer.next()
 
 class LexerSpec extends AnyFlatSpec {
-	"Lexer with empty input" should "output nothing" in {
+	"Lexer with empty input" should "only output EOF tokens" in {
 		val lexer = makeLexer("")
-		assertLexerOutput(lexer, List())
+		assertLexerOutput(lexer, List(
+			Token(TokenKind.Eof, "", (1, 0))
+		))
 	}
 
 	"Lexer" should "correctly lex parentheses" in {
