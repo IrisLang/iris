@@ -5,13 +5,9 @@ import scala.collection.immutable.HashSet
 import iris.reader.Position
 
 enum TokenKind:
-	case LParen, RParen, Identifier, Keyword, Integer, Eof, Unknown
+	case LParen, RParen, Identifier, Keyword, Integer, Eof
 
-case class Token(
-	kind: TokenKind = TokenKind.Unknown,
-	lexeme: String = "",
-	pos: Position = (0, 0)
-)
+case class Token(kind: TokenKind, lexeme: String, pos: Position)
 
 val ReservedKeywords = HashSet(
 	"let"

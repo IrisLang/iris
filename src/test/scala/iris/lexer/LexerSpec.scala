@@ -9,7 +9,7 @@ def makeLexer(input: String) = Lexer(Reader(input))
 
 def assertLexerOutput(lexer: Lexer, output: List[Token]): Unit =
 	for token <- output do
-		lexer.peek shouldBe token
+		lexer.peek shouldBe Right(token)
 		lexer.next()
 
 class LexerSpec extends AnyFlatSpec {
