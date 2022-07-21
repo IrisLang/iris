@@ -1,9 +1,10 @@
 package iris.lexer
 
+import iris.exception.InvalidCharacter
 import iris.reader.{Position, Reader}
 
 class Lexer(reader: Reader):
-	private var token: Either[LexerException, Token] = Left(LexerException.InvalidCharacter)
+	private var token: Either[InvalidCharacter, Token] = Left(InvalidCharacter(0))
 
 	private def isValidWordChar(char: Char): Boolean =
 		val pattern = "[!#$%&'*+\\-./<=>?@^`|~\\w]".r
@@ -29,7 +30,7 @@ class Lexer(reader: Reader):
 			reader.next()
 
 		if str.isEmpty then
-			token = Left(LexerException.InvalidCharacter)
+			token = Left(InvalidCharacter(reader.peek.get))
 			return
 
 		val lexeme = str.toString
@@ -47,7 +48,7 @@ class Lexer(reader: Reader):
 		while reader.peek.isDefined && reader.peek.get.isWhitespace do
 			reader.next()
 
-	def peek: Either[LexerException, Token] = token
+	def peek: Either[InvalidCharacter, Token] = token
 
 	def next(): Unit =
 		skipWhitespace()
