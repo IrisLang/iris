@@ -12,6 +12,8 @@ def assertLexerOutput(lexer: Lexer, output: List[Token]): Unit =
 		lexer.peek shouldBe Right(token)
 		lexer.next()
 
+	lexer.empty shouldBe true
+
 class LexerSpec extends AnyFlatSpec {
 	"Lexer with empty input" should "only output EOF tokens" in {
 		val lexer = makeLexer("")

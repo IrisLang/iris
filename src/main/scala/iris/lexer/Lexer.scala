@@ -48,6 +48,8 @@ class Lexer(reader: Reader):
 		while reader.peek.isDefined && reader.peek.get.isWhitespace do
 			reader.next()
 
+	def empty: Boolean = token.map(_.kind) == Right(TokenKind.Eof)
+
 	def peek: Either[InvalidCharacter, Token] = token
 
 	def next(): Unit =
