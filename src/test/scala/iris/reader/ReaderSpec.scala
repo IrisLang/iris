@@ -9,6 +9,8 @@ def assertReaderOutput(reader: Reader, output: List[(Char, Position)]): Unit =
 		reader.pos shouldBe pos
 		reader.next()
 
+	reader.empty shouldBe true
+
 class ReaderSpec extends AnyFlatSpec {
 	"Reader with empty input" should "output nothing" in {
 		val reader = Reader("")

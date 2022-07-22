@@ -7,9 +7,9 @@ class Reader(input: String):
 	private var line = 1
 	private var col = 0
 
-	def pos: Position = (line, col)
+	def empty: Boolean = peek.isEmpty
 
-	def hasPrefix(prefix: String): Boolean = input.startsWith(prefix, index)
+	def pos: Position = (line, col)
 
 	def peek: Option[Char] = if index < input.length then Some(input.charAt(index)) else None
 
