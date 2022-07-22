@@ -30,7 +30,7 @@ class Lexer(reader: Reader):
 			reader.next()
 
 		if str.isEmpty then
-			token = Left(InvalidCharacter(reader.peek.get))
+			token = Left(InvalidCharacter(pos, reader.peek.get))
 			return
 
 		val lexeme = str.toString
