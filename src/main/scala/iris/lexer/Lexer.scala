@@ -25,7 +25,7 @@ class Lexer(reader: Reader):
 		val pos = reader.pos
 		val str = StringBuilder()
 
-		while reader.peek.isDefined && isValidWordChar(reader.peek.get) do
+		while !reader.empty && isValidWordChar(reader.peek.get) do
 			str.append(reader.peek.get)
 			reader.next()
 
@@ -45,7 +45,7 @@ class Lexer(reader: Reader):
 		token = Right(Token(kind, lexeme, pos))
 
 	private def skipWhitespace(): Unit =
-		while reader.peek.isDefined && reader.peek.get.isWhitespace do
+		while !reader.empty && reader.peek.get.isWhitespace do
 			reader.next()
 
 	def empty: Boolean = token.map(_.kind) == Right(TokenKind.Eof)
