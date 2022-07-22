@@ -4,7 +4,7 @@ import iris.exception.InvalidCharacter
 import iris.reader.{Position, Reader}
 
 class Lexer(reader: Reader):
-	private var token: Either[InvalidCharacter, Token] = Left(InvalidCharacter(0))
+	private var token: Either[InvalidCharacter, Token] = Right(Token())
 
 	private def isValidWordChar(char: Char): Boolean =
 		val pattern = "[!#$%&'*+\\-./<=>?@^`|~\\w]".r
